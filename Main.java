@@ -1,21 +1,26 @@
-public class Main{
-    public static void main(String[] args) {
-        Owl test1 = new Owl();
-        test1.start();
-        Liza test2 = new Liza();
-        test2.start();
+class Animal extends Thread {
+
+    public Animal(String name,int newPriority) {
+        this.name = name;
+        this.newPriority = newPriority;
+    }
+    int time = 8;
+    int hour = 0;
+    int newPriority;
+    String name;
+    public void run() {
+        for(int i = 0; i<time;i++){
+            hour++;
+            Animal.currentThread().setPriority(newPriority);
+            System.out.println(name + " спит: " + hour + " часов");
+        }
     }
 }
-class Owl extends Thread{
-    public void run(){
-        for (int i = 1; i < 9; i++){
-            System.out.println("Сова спит " + i + " часов");
-        }
-    }
-}class Liza extends Thread{
-    public void run(){
-        for (int i = 1; i < 6; i++){
-            System.out.println("Лиза спит " + i + " часов");
-        }
+public class OwlOrLiza {
+    public static void main(String args[]){
+        Animal owl = new Animal("Сова",1);
+        Animal liza = new Animal("Лиза",10);
+        owl.start();
+        liza.start();
     }
 }
